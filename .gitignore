@@ -1,0 +1,6 @@
+*.pyc
+**/migrations/0*.py
+dev_settings.py
+db.sqlite3
+.idea/*
+
