@@ -35,15 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base',
-    'admin_log',
-    'web',
-    'user_auth',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
-    'rest_framework.authtoken'
+    'corsheaders'
 ]
 
 SITE_ID = 1
@@ -57,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -68,7 +62,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-ROOT_URLCONF = 'blog.urls'
+ROOT_URLCONF = 'sitemonitor.urls'
 
 TEMPLATES = [
     {
@@ -86,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blog.wsgi.application'
+WSGI_APPLICATION = 'sitemonitor.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -143,4 +137,4 @@ STATICFILES_DIRS = (
 )
 
 
-from dev_settings import *
+from .dev_settings import *
