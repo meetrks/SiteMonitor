@@ -7,11 +7,13 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
 from base.pagination import Pagination
+from base.permissions import IsSuperUser
 from monitor.models import SiteDetail
 from monitor.serializers import SiteDetailSerializer
 
 
 class SiteDetailView(ListAPIView):
+    permission_classes = (IsSuperUser,)
     serializer_class = SiteDetailSerializer
     model = SiteDetail
     pagination_class = Pagination
