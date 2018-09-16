@@ -20,4 +20,5 @@ favicon_view = RedirectView.as_view(url='/st/logo/favicon.png', permanent=True)
 
 urlpatterns = [
     url(r'^favicon\.ico$', favicon_view),
+    url(r'', include('monitor.urls')),
 ]
