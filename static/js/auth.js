@@ -3,7 +3,8 @@
       delimiters: ['${','}'],
       data: {
         loginData: {'username': null, 'password': null},
-        token: localStorage.getItem('access_token') || null
+        token: localStorage.getItem('access_token') || null,
+        error_msg: null
       },
       mounted: function() {
         if (this.token){
@@ -18,8 +19,10 @@
                 let token = response.data.key;
                 localStorage.setItem('access_token', 'Token ' + token)
                 window.location = '/'
+                this.error_msg = null;
               })
               .catch((err) => {
+                this.error_msg = err.body.non_field_errors[0]
               })
         },
         userLoginPage: function(){
