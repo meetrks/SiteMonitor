@@ -1,4 +1,4 @@
-{% extends 'monitor/base.html' %}
+{% extends 'base.html' %}
 
 {% block page_title %}{{response.page_title}}{% endblock %}
 {% block page_active_sd %}site-bar-blue{% endblock %}
@@ -120,4 +120,7 @@
 </div>
 
 
+{% endblock %}
+{% block load-js %}
+<script src="/st/js/script.js"></script>
 {% endblock %}

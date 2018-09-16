@@ -11,6 +11,8 @@
 </head>
 <body>
 <div id="app-main">
+    <div v-if="token"><button v-on:click="userLogout()">Logout</button></div>
+    <!--<div v-else><button v-on:click="userLoginPage()">Login</button></div>-->
     <div class="container">
         {% block content %}{% endblock %}
     </div>
@@ -19,6 +21,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/st/js/script.js"></script>
+{% block load-js %}{% endblock %}
 </body>
 </html>
