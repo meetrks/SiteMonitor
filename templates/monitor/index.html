@@ -1,17 +1,11 @@
 {% extends 'base.html' %}
 
 {% block page_title %}{{response.page_title}}{% endblock %}
-{% block page_active_sd %}site-bar-blue{% endblock %}
+{% block active_home %}active{% endblock %}
 {% block title %}Site Details{% endblock %}
-{% block add_btn %}
-<div class="padding-16 right">
-    <button><i class="fa fa-refresh main-color add-sites" id="refresh-sites"></i></button>
-    <button><i class="fa fa-plus main-color add-sites" id="add-sites"></i></button>
-</div>
-{% endblock %}
 {% block content %}
-<button class="btn btn-primary" v-on:click="getSiteData()"><i class="glyphicon glyphicon-refresh"></i></button>
-<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSiteModal"><i class="glyphicon glyphicon-plus"></i></button>
+<button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addSiteModal"><i class="glyphicon glyphicon-plus"></i></button>
+<button class="btn btn-primary float-right" v-on:click="getSiteData()"><i class="glyphicon glyphicon-refresh"></i></button>
 <table class="table">
     <thead>
     <tr>

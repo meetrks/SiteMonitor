@@ -1,6 +1,68 @@
+body{
+    background-color: #f5f5f5;
+}
+#app-main{
+    margin: 5%;
+    background-color: #fff;
+    height: 86vh;
+}
+.logo{
+    text-align: center;
+    padding-bottom: 15px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    background-color: #f1f1f1;
+    position: absolute;
+    height: 95%;
+    overflow: auto;
+    padding-top: 10px;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #417690;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+.container{
+    margin-left: 15%;
+    padding: 10px 16px;
+    height: 100%;
+    width: 85%;
+}
+.float-right{
+    float: right;
+    margin-right: 5px;
+}
 .btn-true{
     color: green;
 }
 .btn-false{
     color: #de1111;
+}
+footer{
+    background: #417690;
+    padding: 0;
+    position: relative;
+    text-align: center;
+}
+.btn-primary, .btn-info{
+    background: #417690;
+}
+.login-form{
+    padding: 0 10% 0 10%;
 }
