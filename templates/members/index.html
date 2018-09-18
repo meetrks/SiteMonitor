@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{response.page_title}}{% endblock %}
+{% block active_user %}active{% endblock %}
+{% block title %}Members Details{% endblock %}
+{% block content %}
+<button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addMemberModal"><i class="glyphicon glyphicon-plus"></i></button>
+<button class="btn btn-primary float-right" v-on:click="getMemberData()"><i class="glyphicon glyphicon-refresh"></i></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Member ID</th>
+        <th>Member Name</th>
+        <th>Email ID</th>
+        <th>Mobile</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="member in member_dir.members">
+        <th scope="row">${member.id}</th>
+        <td>${member.member_name}</td>
+        <td>${member.email}</td>
+        <td>${member.mobile}</td>
+        <td v-if="member.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
+        <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
+        <td>
+            <button class="btn btn-info" v-on:click="getMemberDetails(member.id)"><i class="glyphicon glyphicon-pencil"></i></button>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<!--Add-->
+<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="addModalMemberTitle">Add A Record</h4>
+            </div>
+            <form v-on:submit.prevent="addNewMember()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add_member_name">Member Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="add_member_name"
+                                placeholder="Enter Member Name"
+                                v-model="member_dir.newMember.member_name"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="add_member_email">Email ID</label>
+                        <input
+                                class="form-control"
+                                id="add_member_email"
+                                placeholder="Enter Email ID"
+                                v-model="member_dir.newMember.email"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="add_member_mobile">Mobile</label>
+                        <input
+                                class="form-control"
+                                id="add_member_mobile"
+                                placeholder="Enter Mobile Number"
+                                v-model="member_dir.newMember.mobile"
+                                required="required">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Update-->
+<div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="updateModalMemberTitle">Update Member Details</h4>
+            </div>
+            <form v-on:submit.prevent="updateMemberDetails()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="member_name">Member Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="member_name"
+                                placeholder="Enter Member Name"
+                                v-model="member_dir.member_details.member_name"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                                class="form-control"
+                                id="email"
+                                placeholder="Enter Email Id"
+                                v-model="member_dir.member_details.email"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input
+                                class="form-control"
+                                id="mobile"
+                                placeholder="Enter Mobile Number"
+                                v-model="member_dir.member_details.mobile"
+                                required="required">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block load-js %}
+<script src="/st/js/script.js"></script>
+{% endblock %}
