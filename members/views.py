@@ -1,29 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.utils.text import slugify
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 from base.pagination import Pagination
 from base.permissions import IsSuperUser
-from monitor.models import SiteDetail
-from monitor.serializers import SiteDetailSerializer
+from members.models import MemberDirectory
+from members.serializers import MemberDirectorySerializer
 
 
-class SiteDetailView(GenericAPIView):
-    permission_classes = (IsSuperUser,)
-    serializer_class = SiteDetailSerializer
-    model = SiteDetail
+class MemberDirectoryView(GenericAPIView):
+    # permission_classes = (IsSuperUser,)
+    serializer_class = MemberDirectorySerializer
+    model = MemberDirectory
     pagination_class = Pagination
 
     def get(self, request, id=None):
         if id:
-            query = SiteDetail.objects.get(pk=id)
+            query = MemberDirectory.objects.get(pk=id)
             serializer = self.get_serializer(query)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        queryset = SiteDetail.objects.all()
+        queryset = MemberDirectory.objects.all()
         paginator = self.pagination_class()
         result = paginator.paginate_queryset(queryset=queryset, request=request)
         serializer = self.get_serializer(result, many=True)
@@ -34,7 +33,6 @@ class SiteDetailView(GenericAPIView):
     def post(self, request):
         try:
             data = request.data
-            data['site_slug'] = slugify(data.get('site_name'))
             serializer = self.get_serializer(data=data)
             if serializer.is_valid():
                 serializer.save()
@@ -44,20 +42,19 @@ class SiteDetailView(GenericAPIView):
                 error = serializer.errors[key][0].replace('slug', 'name')
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail": "Error while adding site"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Error while adding member"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):
-        instance = SiteDetail.objects.get(pk=id)
+        instance = MemberDirectory.objects.get(pk=id)
         try:
             data = request.data
-            data['site_slug'] = slugify(data.get('site_name'))
             serializer = self.get_serializer(instance, data=data)
             if serializer.is_valid():
                 serializer.save()
                 return Response({"data": serializer.data}, status=status.HTTP_200_OK)
             else:
                 key = next(iter(serializer.errors))
-                error = serializer.errors[key][0].replace('slug', 'name')
+                error = serializer.errors[key][0]
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail": "Error while adding site"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Error while adding member"}, status=status.HTTP_400_BAD_REQUEST)

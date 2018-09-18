@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'base',
     'monitor',
+    'members',
     'rest_framework',
     'rest_framework.authtoken',
 ]
