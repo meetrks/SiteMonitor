@@ -12,7 +12,7 @@ from members.serializers import MemberDirectorySerializer
 
 
 class MemberDirectoryView(GenericAPIView):
-    # permission_classes = (IsSuperUser,)
+    permission_classes = (IsSuperUser,)
     serializer_class = MemberDirectorySerializer
     model = MemberDirectory
     pagination_class = Pagination
