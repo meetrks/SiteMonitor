@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'base',
     'monitor',
     'members',
+    'roles',
     'rest_framework',
     'rest_framework.authtoken',
 ]

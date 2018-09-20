@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{response.page_title}}{% endblock %}
+{% block active_roles %}active{% endblock %}
+{% block title %}Role Details{% endblock %}
+{% block content %}
+<button  type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addRoleModal"><i class="glyphicon glyphicon-plus"></i></button>
+<button class="btn btn-primary float-right" v-on:click="getRoleData()"><i class="glyphicon glyphicon-refresh"></i></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Role ID</th>
+        <th>Role Name</th>
+        <th>Alert Difference</th>
+        <th>Last Alert</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="role in roles.roles">
+        <th scope="row">${role.id}</th>
+        <td>${role.role_name}</td>
+        <td>${role.alert_diff}</td>
+        <td>${role.last_alert_on}</td>
+        <td v-if="role.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
+        <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
+        <td>
+            <button class="btn btn-info" v-on:click="getRoleDetails(role.id)"><i class="glyphicon glyphicon-pencil"></i></button>
+        </td>
+
+    </tr>
+    <tr v-if="!roles.roles.length">
+        <td>No Data Found</td>
+    </tr>
+    </tbody>
+</table>
+
+<!--Add-->
+<div class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="addModalRoleTitle">Add A Record</h4>
+            </div>
+            <form v-on:submit.prevent="addNewRole()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add_role_name">Role Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="add_role_name"
+                                placeholder="Enter Role Name"
+                                v-model="roles.newRole.role_name"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="add_alert_diff">Alert Difference</label>
+                        <input
+                                class="form-control"
+                                id="add_alert_diff"
+                                placeholder="Set Alert Difference"
+                                v-model="roles.newRole.alert_diff"
+                                required="required">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Update-->
+<div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="updateModalRoleTitle">Update Role Details</h4>
+            </div>
+            <form v-on:submit.prevent="updateRoleDetails()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="role_name">Role Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="role_name"
+                                placeholder="Enter Role Name"
+                                v-model="roles.role_details.role_name"
+                                required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="alert_diff">Alert Difference</label>
+                        <input
+                                class="form-control"
+                                id="alert_diff"
+                                placeholder="Set Alert Difference"
+                                v-model="roles.role_details.alert_diff"
+                                required="required">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block load-js %}
+<script src="/st/js/script.js"></script>
+{% endblock %}

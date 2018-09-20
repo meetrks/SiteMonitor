@@ -15,6 +15,12 @@
             members: [],
             newMember: {'member_name': null, 'email': null, 'mobile': null},
             member_details: {}
+        },
+
+        roles: {
+            roles: [],
+            newRole: {'role_name': null, 'alert_diff': null},
+            role_details: {}
         }
       },
       mounted: function() {
@@ -23,6 +29,7 @@
         }
         this.getSiteData();
         this.getMemberData();
+        this.getRoleData();
       },
       methods: {
         getSiteData: function() {
@@ -90,6 +97,7 @@
               .then((response) => {
                 this.site_details = response.data;
                 $("#addSiteModal").modal('hide');
+                this.newSite = {};
                 this.getSiteData();
 
               })
@@ -145,6 +153,7 @@
               .then((response) => {
                 this.member_dir.member_details = response.data;
                 $("#addMemberModal").modal('hide');
+                this.member_details.newMember = {};
                 this.getMemberData();
 
               })
@@ -182,6 +191,82 @@
                 this.member_dir.member_details = response.data;
                 $("#editMemberModal").modal('hide');
                 this.getMemberData();
+
+              })
+              .catch((err) => {
+                if(err.status == 401){
+                    window.location = '/auth/login'
+                }
+              })
+        },
+
+        getRoleData: function() {
+          let url = '/roles/role/';
+          this.$http.get(url, {
+                headers: {
+                'Authorization': this.token
+              }
+              })
+              .then((response) => {
+                let data = response.data;
+                this.roles.roles = data.results;
+                this.next_page = data.next;
+                this.prev_page = data.previous;
+                this.total_page = data.count;
+              })
+              .catch((err) => {
+                if(err.status == 401){
+                    window.location = '/auth/login'
+                }
+              })
+        },
+        addNewRole: function(id) {
+          this.$http.post(`/roles/role/`, this.roles.newRole, {
+                headers: {
+                'Authorization': this.token
+              }
+              })
+              .then((response) => {
+                this.roles.role_details = response.data;
+                $("#addRoleModal").modal('hide');
+                this.roles.newRole = {}
+                this.getRoleData();
+
+              })
+              .catch((err) => {
+                if(err.status == 401){
+                    window.location = '/auth/login'
+                }
+              })
+        },
+        getRoleDetails: function(id) {
+          let url = `/roles/role/${id}/`;
+          this.$http.get(url, {
+                headers: {
+                'Authorization': this.token
+              }
+              })
+              .then((response) => {
+                this.roles.role_details = response.data;
+                $("#editRoleModal").modal('show');
+
+              })
+              .catch((err) => {
+                if(err.status == 401){
+                    window.location = '/auth/login'
+                }
+              })
+        },
+        updateRoleDetails: function(id) {
+          this.$http.put(`/roles/role/${this.roles.role_details.id}/`, this.roles.role_details, {
+                headers: {
+                'Authorization': this.token
+              }
+              })
+              .then((response) => {
+                this.roles.role_details = response.data;
+                $("#editRoleModal").modal('hide');
+                this.getRoleData();
 
               })
               .catch((err) => {
