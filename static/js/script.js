@@ -153,7 +153,7 @@
               .then((response) => {
                 this.member_dir.member_details = response.data;
                 $("#addMemberModal").modal('hide');
-                this.member_details.newMember = {};
+                this.member_dir.newMember = {};
                 this.getMemberData();
 
               })
