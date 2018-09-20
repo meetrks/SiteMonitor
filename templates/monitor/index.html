@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     <tr v-for="site in sites">
-        <th scope="row">${site.id}</th>
+        <th scope="row">${site.short_id}</th>
         <td>${site.site_name}</td>
         <td>${site.site_url}</td>
         <td v-if="site.status" class="btn-true"><i class="glyphicon glyphicon-arrow-up"></i></td>

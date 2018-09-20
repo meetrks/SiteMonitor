@@ -31,7 +31,7 @@ class RolesView(GenericAPIView):
         return Response(response, status=status.HTTP_200_OK)
 
     def post(self, request):
-        try:
+        if 1:#try:
             data = request.data
             serializer = self.get_serializer(data=data)
             if serializer.is_valid():
@@ -41,7 +41,7 @@ class RolesView(GenericAPIView):
                 key = next(iter(serializer.errors))
                 error = serializer.errors[key][0]
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
+        if 0:#except Exception as e:
             return Response({"detail": "Error while adding role"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):

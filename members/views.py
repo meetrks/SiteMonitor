@@ -57,4 +57,4 @@ class MemberDirectoryView(GenericAPIView):
                 error = serializer.errors[key][0]
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail": "Error while adding member"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Error while updating member"}, status=status.HTTP_400_BAD_REQUEST)
