@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^memberdir/', include('members.urls')),
     url(r'^roles/', include('roles.urls')),
+    url(r'^settings/', include('settings.urls')),
 ]
