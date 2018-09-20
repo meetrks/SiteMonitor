@@ -10,7 +10,7 @@ from base.utils import generate_short_id
 
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    short_id = models.CharField(max_length=8, null=True, blank=True, unique=True)
+    short_id = models.CharField(max_length=8, null=True, blank=True, unique=True, db_index=True)
     is_deleted = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
