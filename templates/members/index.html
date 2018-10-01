@@ -71,6 +71,15 @@
                                 v-model="member_dir.newMember.mobile"
                                 required="required">
                     </div>
+                    <div class="form-group">
+                        <label for="add_is_active">Active</label>
+                        <input
+                                class=""
+                                type="checkbox"
+                                value=""
+                                id="add_is_active"
+                                v-model="member_dir.newMember.is_active">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
@@ -118,6 +127,15 @@
                                 placeholder="Enter Mobile Number"
                                 v-model="member_dir.member_details.mobile"
                                 required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="is_active">Active</label>
+                        <input
+                                class=""
+                                type="checkbox"
+                                value=""
+                                id="is_active"
+                                v-model="member_dir.member_details.is_active">
                     </div>
                 </div>
                 <div class="modal-footer">
