@@ -116,6 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CELERY_ACCEPT_CONTENT = ['json']
+CLERY_TASK_SERIALISER = 'json'
+CLERY_RESULT_SERIALISER = 'json'
+BROKEN_URL = 'redis://localhost:6379/0'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
