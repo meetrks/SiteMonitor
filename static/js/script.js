@@ -108,21 +108,33 @@
               })
         },
         userLogout: function() {
-          this.$http.post(`/rest-auth/logout/`, {
-                headers: {
-                'Authorization': this.token
-              }
-              })
-              .then((response) => {
-                localStorage.removeItem('access_token')
-                this.token = null
-                window.location = '/auth/login'
-              })
-              .catch((err) => {
-                if(err.status == 401){
+            swal({
+              title: 'Are you sure?',
+              text: "You will be returned to login screen.",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Logout'
+            }).then((result) => {
+              if (result.value) {
+                    this.$http.post(`/rest-auth/logout/`, {
+                    headers: {
+                    'Authorization': this.token
+                  }
+                  })
+                  .then((response) => {
+                    localStorage.removeItem('access_token')
+                    this.token = null
                     window.location = '/auth/login'
-                }
-              })
+                  })
+                  .catch((err) => {
+                    if(err.status == 401){
+                        window.location = '/auth/login'
+                    }
+                  })
+              }
+            })
         },
         getMemberData: function() {
           let url = '/memberdir/member/';
