@@ -65,6 +65,15 @@
                                 v-model="roles.newRole.alert_diff"
                                 required="required">
                     </div>
+                    <div class="form-group">
+                        <label for="add_is_active">Active</label>
+                        <input
+                                class=""
+                                type="checkbox"
+                                value=""
+                                id="add_is_active"
+                                v-model="roles.newRole.is_active">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default m-progress" data-dismiss="modal">Close</button>
@@ -103,6 +112,15 @@
                                 placeholder="Set Alert Difference"
                                 v-model="roles.role_details.alert_diff"
                                 required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="is_active">Active</label>
+                        <input
+                                class=""
+                                type="checkbox"
+                                value=""
+                                id="is_active"
+                                v-model="roles.role_details.is_active">
                     </div>
                 </div>
                 <div class="modal-footer">
