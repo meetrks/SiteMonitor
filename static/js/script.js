@@ -6,7 +6,7 @@
         next_page: null,
         prev_page: null,
         total_page: 1,
-        message: null,
+        error_msg: null,
         site_details: {},
         newSite: {'site_name': null, 'site_url': null},
         token: localStorage.getItem('access_token') || null,
@@ -33,6 +33,7 @@
       },
       methods: {
         getSiteData: function() {
+          this.error_msg = null
           let url = '/site/';
           this.$http.get(url, {
                 headers: {
@@ -53,6 +54,7 @@
               })
         },
         getSiteDetails: function(id) {
+          this.error_msg = null
           let url = `/site/${id}/`;
           this.$http.get(url, {
                 headers: {
@@ -71,6 +73,7 @@
               })
         },
         updateSiteDetails: function(id) {
+          this.error_msg = null
           this.$http.put(`/site/${this.site_details.id}/`, this.site_details, {
                 headers: {
                 'Authorization': this.token
@@ -85,10 +88,18 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },
         addNewSite: function(id) {
+          this.error_msg = null
           this.$http.post(`/site/`, this.newSite, {
                 headers: {
                 'Authorization': this.token
@@ -104,10 +115,18 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },
         userLogout: function() {
+            this.error_msg = null
             swal({
               title: 'Are you sure?',
               text: "You will be returned to login screen.",
@@ -137,6 +156,7 @@
             })
         },
         getMemberData: function() {
+          this.error_msg = null
           let url = '/memberdir/member/';
           this.$http.get(url, {
                 headers: {
@@ -157,6 +177,7 @@
               })
         },
         addNewMember: function(id) {
+          this.error_msg = null
           this.$http.post(`/memberdir/member/`, this.member_dir.newMember, {
                 headers: {
                 'Authorization': this.token
@@ -172,10 +193,18 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },
         getMemberDetails: function(id) {
+          this.error_msg = null
           let url = `/memberdir/member/${id}/`;
           this.$http.get(url, {
                 headers: {
@@ -194,6 +223,7 @@
               })
         },
         updateMemberDetails: function(id) {
+          this.error_msg = null
           this.$http.put(`/memberdir/member/${this.member_dir.member_details.id}/`, this.member_dir.member_details, {
                 headers: {
                 'Authorization': this.token
@@ -208,11 +238,19 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },
 
         getRoleData: function() {
+          this.error_msg = null
           let url = '/roles/role/';
           this.$http.get(url, {
                 headers: {
@@ -233,6 +271,7 @@
               })
         },
         addNewRole: function(id) {
+          this.error_msg = null
           this.$http.post(`/roles/role/`, this.roles.newRole, {
                 headers: {
                 'Authorization': this.token
@@ -248,10 +287,18 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },
         getRoleDetails: function(id) {
+          this.error_msg = null
           let url = `/roles/role/${id}/`;
           this.$http.get(url, {
                 headers: {
@@ -270,6 +317,7 @@
               })
         },
         updateRoleDetails: function(id) {
+          this.error_msg = null
           this.$http.put(`/roles/role/${this.roles.role_details.id}/`, this.roles.role_details, {
                 headers: {
                 'Authorization': this.token
@@ -284,6 +332,13 @@
               .catch((err) => {
                 if(err.status == 401){
                     window.location = '/auth/login'
+                }else{
+                    try{
+                        this.error_msg = err.body.non_field_errors[0]
+                    }catch{
+                        this.error_msg = err.body.detail
+                    }
+
                 }
               })
         },

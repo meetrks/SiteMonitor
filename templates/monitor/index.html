@@ -78,6 +78,9 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
+            <div class="alert alert-danger fade in" v-if="error_msg">
+                <span>${error_msg}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -126,6 +129,9 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
+            <div class="alert alert-danger fade in" v-if="error_msg">
+                <span>${error_msg}</span>
+            </div>
         </div>
     </div>
 

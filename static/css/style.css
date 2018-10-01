@@ -69,3 +69,6 @@ footer{
 .id-click{
     cursor: pointer;
 }
+.alert-danger{
+    margin: 10px;
+}
