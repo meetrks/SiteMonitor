@@ -10,6 +10,7 @@ from members.models import MemberDirectory
 from monitor.models import SiteDetail
 from roles.models import Role
 
+urllib3.disable_warnings()
 http = urllib3.PoolManager()
 
 
@@ -23,7 +24,7 @@ def alert_user(site):
         if now - int(role.last_alert_on) > int(role.alert_diff) * 60:
             role.last_alert_on = now
             role.save()
-            users = MemberDirectory.objects.filter(is_active=True)#, user_role=role)
+            users = MemberDirectory.objects.filter(is_active=True)  # , user_role=role)
             send_sms(users=users, site=site)
 
 
