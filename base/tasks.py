@@ -2,16 +2,13 @@ from __future__ import absolute_import
 
 import time
 
-import urllib3
 from celery import shared_task
 
 from base.send_sms import send_sms
+from base.utils import get_site_status
 from members.models import MemberDirectory
 from monitor.models import SiteDetail
 from roles.models import Role
-
-urllib3.disable_warnings()
-http = urllib3.PoolManager()
 
 
 def alert_user(site):
@@ -26,18 +23,6 @@ def alert_user(site):
             role.save()
             users = MemberDirectory.objects.filter(is_active=True)  # , user_role=role)
             send_sms(users=users, site=site)
-
-
-def get_site_status(site_url):
-    try:
-        if site_url:
-            r = http.request('GET', site_url, headers={
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
-            })
-            return r.status
-    except:
-        pass
-    return None
 
 
 @shared_task
