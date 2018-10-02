@@ -33,6 +33,13 @@
     </tbody>
 </table>
 
+<div class="pagination">
+    <button v-if="member_dir.prev_page" v-on:click="getMemberData(member_dir.prev_page)" class="pagination-link pagination-link-left"> &#60; </button>
+    Page ${member_dir.current_page} of ${member_dir.total_page}
+    <button v-if="member_dir.next_page" v-on:click="getMemberData(member_dir.next_page)" class="pagination-link pagination-link-right"> &#62; </button>
+</div>
+
+
 <!--Add-->
 <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
