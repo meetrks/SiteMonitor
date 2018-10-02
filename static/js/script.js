@@ -1,3 +1,11 @@
+    Vue.filter('timeStampToDateTime', function(value) {
+      if (value) {
+        return moment.unix(value).format('DD-MM-YYYY hh:mm:ss')
+      }else{
+        return "-"
+      }
+    });
+
     new Vue({
       el: '#app-main',
       delimiters: ['${','}'],

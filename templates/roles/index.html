@@ -22,7 +22,7 @@
         <th scope="row" v-on:click="getRoleDetails(role.id)" class="id-click">${role.short_id}</th>
         <td>${role.role_name}</td>
         <td>${role.alert_diff}</td>
-        <td>${role.last_alert_on}</td>
+        <td>${role.last_alert_on | timeStampToDateTime}</td>
         <td v-if="role.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
         <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
         <td>
