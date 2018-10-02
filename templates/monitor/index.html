@@ -34,6 +34,12 @@
     </tbody>
 </table>
 
+<div class="pagination">
+    <button v-if="prev_page" v-on:click="getSiteData(prev_page)" class="pagination-link pagination-link-left"> &#60; </button>
+    Page ${current_page} of ${total_page}
+    <button v-if="next_page" v-on:click="getSiteData(next_page)" class="pagination-link pagination-link-right"> &#62; </button>
+</div>
+
 <!--Add-->
 <div class="modal fade" id="addSiteModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">

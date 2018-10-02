@@ -36,6 +36,13 @@
     </tbody>
 </table>
 
+<div class="pagination">
+    <button v-if="roles.prev_page" v-on:click="getRoleData(roles.prev_page)" class="pagination-link pagination-link-left"> &#60; </button>
+    Page ${roles.current_page} of ${roles.total_page}
+    <button v-if="roles.next_page" v-on:click="getRoleData(roles.next_page)" class="pagination-link pagination-link-right"> &#62; </button>
+</div>
+
+
 <!--Add-->
 <div class="modal fade" id="addRoleModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">

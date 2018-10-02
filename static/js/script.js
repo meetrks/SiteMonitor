@@ -6,6 +6,7 @@
         next_page: null,
         prev_page: null,
         total_page: 1,
+        current_page: 1,
         error_msg: null,
         site_details: {},
         newSite: {'site_name': null, 'site_url': null},
@@ -14,13 +15,21 @@
         member_dir: {
             members: [],
             newMember: {'member_name': null, 'email': null, 'mobile': null},
-            member_details: {}
+            member_details: {},
+            next_page: null,
+            prev_page: null,
+            total_page: 1,
+            current_page: 1,
         },
 
         roles: {
             roles: [],
             newRole: {'role_name': null, 'alert_diff': null},
-            role_details: {}
+            role_details: {},
+            next_page: null,
+            prev_page: null,
+            total_page: 1,
+            current_page: 1,
         }
       },
       mounted: function() {
@@ -32,9 +41,12 @@
         this.getRoleData();
       },
       methods: {
-        getSiteData: function() {
+        getSiteData: function(url_) {
           this.error_msg = null
           let url = '/site/';
+          if (url_){
+            url = url_
+          }
           this.$http.get(url, {
                 headers: {
                 'Authorization': this.token
@@ -45,7 +57,8 @@
                 this.sites = data.results;
                 this.next_page = data.next;
                 this.prev_page = data.previous;
-                this.total_page = data.count;
+                this.total_page = data.last_page;
+                this.current_page = data.current_page;
               })
               .catch((err) => {
                 if(err.status == 401){
@@ -155,9 +168,12 @@
               }
             })
         },
-        getMemberData: function() {
+        getMemberData: function(url_) {
           this.error_msg = null
           let url = '/memberdir/member/';
+          if (url_){
+            url = url_
+          }
           this.$http.get(url, {
                 headers: {
                 'Authorization': this.token
@@ -166,9 +182,10 @@
               .then((response) => {
                 let data = response.data;
                 this.member_dir.members = data.results;
-                this.next_page = data.next;
-                this.prev_page = data.previous;
-                this.total_page = data.count;
+                this.member_dir.next_page = data.next;
+                this.member_dir.prev_page = data.previous;
+                this.member_dir.total_page = data.last_page;
+                this.member_dir.current_page = data.current_page;
               })
               .catch((err) => {
                 if(err.status == 401){
@@ -249,9 +266,12 @@
               })
         },
 
-        getRoleData: function() {
+        getRoleData: function(url_) {
           this.error_msg = null
           let url = '/roles/role/';
+          if (url_){
+            url = url_
+          }
           this.$http.get(url, {
                 headers: {
                 'Authorization': this.token
@@ -260,9 +280,10 @@
               .then((response) => {
                 let data = response.data;
                 this.roles.roles = data.results;
-                this.next_page = data.next;
-                this.prev_page = data.previous;
-                this.total_page = data.count;
+                this.roles.next_page = data.next;
+                this.roles.prev_page = data.previous;
+                this.roles.total_page = data.last_page;
+                this.roles.current_page = data.current_page;
               })
               .catch((err) => {
                 if(err.status == 401){
