@@ -97,3 +97,9 @@ footer{
 .pagination-link-right{
     margin-left: 20px;
 }
+.page-heading{
+    float: left;
+    margin: 10px;
+    margin-left: 20px;
+    font-size: 25px;
+}

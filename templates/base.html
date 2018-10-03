@@ -16,7 +16,7 @@
           <a href="/"><img src="/st/logo/logo.jpg" height="110px" width="110px"></a>
       </div>
       <li><a class="{% block active_home %}{% endblock %}" href="/"><i class="glyphicon glyphicon-home"></i> Home</a></li>
-      <li><a class="{% block active_user %}{% endblock %}" href="/memberdir"><i class="glyphicon glyphicon-user"></i> User</a></li>
+      <li><a class="{% block active_user %}{% endblock %}" href="/memberdir"><i class="glyphicon glyphicon-user"></i> Members</a></li>
       <li><a class="{% block active_roles %}{% endblock %}" href="/roles"><i class="glyphicon glyphicon-user"></i> Roles</a></li>
       <li><a class="{% block active_setting %}{% endblock %}" href="/settings"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
       <li v-if="token"><a v-on:click="userLogout()" href="#"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
