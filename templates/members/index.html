@@ -15,6 +15,7 @@
         <th>Email ID</th>
         <th>Mobile</th>
         <th>Active</th>
+        <th>Updated On</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -26,6 +27,7 @@
         <td>${member.mobile}</td>
         <td v-if="member.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
         <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
+        <td>${member.modified | formatDate}</td>
         <td>
             <button class="btn btn-info" v-on:click="getMemberDetails(member.id)"><i class="glyphicon glyphicon-pencil"></i></button>
         </td>

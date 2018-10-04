@@ -1,6 +1,14 @@
     Vue.filter('timeStampToDateTime', function(value) {
       if (value) {
-        return moment.unix(value).format('DD-MM-YYYY hh:mm:ss')
+        return moment.unix(value).format('DD-MMM-YYYY hh:mm:ss A')
+      }else{
+        return "-"
+      }
+    });
+
+    Vue.filter('formatDate', function(value) {
+      if (value) {
+        return moment(String(value)).format('DD-MMM-YYYY hh:mm A')
       }else{
         return "-"
       }
