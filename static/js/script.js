@@ -25,12 +25,12 @@
         current_page: 1,
         error_msg: null,
         site_details: {},
-        newSite: {'site_name': null, 'site_url': null},
+        newSite: {'site_name': null, 'site_url': null, 'is_active': true},
         token: localStorage.getItem('access_token') || null,
 
         member_dir: {
             members: [],
-            newMember: {'member_name': null, 'email': null, 'mobile': null},
+            newMember: {'member_name': null, 'email': null, 'mobile': null, 'is_active': true},
             member_details: {},
             next_page: null,
             prev_page: null,
@@ -40,7 +40,7 @@
 
         roles: {
             roles: [],
-            newRole: {'role_name': null, 'alert_diff': null},
+            newRole: {'role_name': null, 'alert_diff': null, 'is_active': true},
             role_details: {},
             next_page: null,
             prev_page: null,
@@ -137,7 +137,7 @@
               .then((response) => {
                 this.site_details = response.data;
                 $("#addSiteModal").modal('hide');
-                this.newSite = {};
+                this.newSite = {'is_active': true};
                 this.getSiteData();
 
               })
@@ -219,7 +219,7 @@
               .then((response) => {
                 this.member_dir.member_details = response.data;
                 $("#addMemberModal").modal('hide');
-                this.member_dir.newMember = {};
+                this.member_dir.newMember = {'is_active': true};
                 this.getMemberData();
 
               })
@@ -317,7 +317,7 @@
               .then((response) => {
                 this.roles.role_details = response.data;
                 $("#addRoleModal").modal('hide');
-                this.roles.newRole = {}
+                this.roles.newRole = {'is_active': true}
                 this.getRoleData();
 
               })
