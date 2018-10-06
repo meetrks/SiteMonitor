@@ -10,7 +10,7 @@ from base.models import BaseModel
 class SiteDetail(BaseModel):
     site_name = models.CharField(max_length=100)
     site_slug = models.SlugField(max_length=255, unique=True)
-    site_url = models.URLField(max_length=4000)
+    site_url = models.URLField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     status = models.BooleanField(default=True)
     last_down_time = models.PositiveIntegerField(default=0)
