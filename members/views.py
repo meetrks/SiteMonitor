@@ -42,6 +42,7 @@ class MemberDirectoryView(GenericAPIView):
                 error = serializer.errors[key][0].replace('slug', 'name')
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print(e)
             return Response({"detail": "Error while adding member"}, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):
@@ -54,7 +55,9 @@ class MemberDirectoryView(GenericAPIView):
                 return Response({"data": serializer.data}, status=status.HTTP_200_OK)
             else:
                 key = next(iter(serializer.errors))
-                error = serializer.errors[key][0]
+                error = serializer.errors[key]
+                error = error['detail'] if isinstance(error, dict) else error[0]
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print(e)
             return Response({"detail": "Error while updating member"}, status=status.HTTP_400_BAD_REQUEST)

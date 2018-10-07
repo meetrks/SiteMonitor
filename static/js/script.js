@@ -30,7 +30,7 @@
 
         member_dir: {
             members: [],
-            newMember: {'member_name': null, 'email': null, 'mobile': null, 'is_active': true},
+            newMember: {'member_name': null, 'email': null, 'mobile': null, 'is_active': true, 'country_code': '+91'},
             member_details: {},
             next_page: null,
             prev_page: null,
@@ -219,7 +219,7 @@
               .then((response) => {
                 this.member_dir.member_details = response.data;
                 $("#addMemberModal").modal('hide');
-                this.member_dir.newMember = {'is_active': true};
+                this.member_dir.newMember = {'is_active': true, 'country_code': '+91'};
                 this.getMemberData();
 
               })

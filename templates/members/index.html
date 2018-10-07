@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page_title %}Member Details{% endblock %}
+{% block page_title %}Member Directory{% endblock %}
 {% block active_user %}active{% endblock %}
 {% block title %}Members Details{% endblock %}
 {% block content %}
@@ -24,7 +24,7 @@
         <th scope="row" v-on:click="getMemberDetails(member.id)" class="id-click">${member.short_id}</th>
         <td>${member.member_name}</td>
         <td>${member.email}</td>
-        <td>${member.mobile}</td>
+        <td>${member.country_code}-${member.mobile}</td>
         <td v-if="member.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
         <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
         <td>${member.modified | formatDate}</td>
@@ -74,12 +74,20 @@
                     </div>
                     <div class="form-group">
                         <label for="add_member_mobile">Mobile</label>
+                        <div>
                         <input
-                                class="form-control"
+                                class="form-control small-input-box float-left"
+                                id="add_country_code"
+                                placeholder="Country Code"
+                                v-model="member_dir.newMember.country_code"
+                                required="required">
+                        <input
+                                class="form-control large-input-box"
                                 id="add_member_mobile"
                                 placeholder="Enter Mobile Number"
                                 v-model="member_dir.newMember.mobile"
                                 required="required">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="add_is_active">Active</label>
@@ -134,12 +142,20 @@
                     </div>
                     <div class="form-group">
                         <label for="mobile">Mobile</label>
+                        <div>
                         <input
-                                class="form-control"
+                                class="form-control small-input-box float-left"
+                                id="country_code"
+                                placeholder="Country code"
+                                v-model="member_dir.member_details.country_code"
+                                required="required">
+                        <input
+                                class="form-control large-input-box"
                                 id="mobile"
                                 placeholder="Enter Mobile Number"
                                 v-model="member_dir.member_details.mobile"
                                 required="required">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="is_active">Active</label>
