@@ -60,4 +60,5 @@ class SiteDetailView(GenericAPIView):
                 error = serializer.errors[key][0].replace('slug', 'name')
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print (e)
             return Response({"detail": "Error while adding site"}, status=status.HTTP_400_BAD_REQUEST)

@@ -15,6 +15,7 @@
         <th>Site Url</th>
         <th>Status</th>
         <th>Active</th>
+        <th>Last Downtime Recorded</th>
         <th>Updated On</th>
         <th>Action</th>
     </tr>
@@ -28,6 +29,7 @@
         <td v-else class="btn-false"><i class="glyphicon glyphicon-arrow-down"></i></td>
         <td v-if="site.is_active" class="btn-true"><i class="glyphicon glyphicon-ok"></i></td>
         <td v-else class="btn-false"><i class="glyphicon glyphicon-remove"></i></td>
+        <td>${site.last_down_time | timeStampToDateTime}</td>
         <td>${site.modified | formatDate}</td>
         <td>
             <button class="btn btn-info" v-on:click="getSiteDetails(site.id)"><i class="glyphicon glyphicon-pencil"></i></button>
