@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'monitor',
     'members',
     'roles',
+    'settings',
     'rest_framework',
     'rest_framework.authtoken',
 ]
