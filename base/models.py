@@ -16,6 +16,7 @@ class BaseModel(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ('-created', )
         abstract = True
 
     def save(self, force_insert=False, force_update=False, using=None):
