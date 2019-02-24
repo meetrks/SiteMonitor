@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.utils.text import slugify
 from rest_framework import status
@@ -60,5 +60,5 @@ class SiteDetailView(GenericAPIView):
                 error = serializer.errors[key][0].replace('slug', 'name')
                 return Response({"detail": error.title()}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            print (e)
+            print(e)
             return Response({"detail": "Error while adding site"}, status=status.HTTP_400_BAD_REQUEST)
